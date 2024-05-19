@@ -11,8 +11,8 @@ const keyMap: KeyMap = {
   "ArrowDown": "down",
   "ArrowLeft": "left",
   "ArrowRight": "right",
-  "j": "up",
-  "k": "down",
+  "k": "up",
+  "j": "down",
   "h": "left",
   "l": "right",
 };
