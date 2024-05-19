@@ -27,9 +27,7 @@ For example, you can navigate Google search results with <kbd>↓</kbd> <kbd>↑
 
 ## Supported Sites
 
-Other well-known sites are also supported, including Amazon's search results page, YouTube's top page, and several news sites.
-
-This extension is made up of a simple combination of URL patterns and CSS selectors like this:
+This extension is made up of a simple combination of URL regex patterns and CSS selectors like this:
 
 ```ts
 const patterns = [
