@@ -14,6 +14,10 @@ export const patterns: Pattern[] = [
     selector: ".title",
   },
   {
+    url: "^https://www.4gamer.net/",
+    selector: "h2 a",
+  },
+  {
     url: "^https://www.amazon.co.jp/s\\?",
     selector: "h2 a",
   },
