@@ -124,9 +124,6 @@ function isModifierKey(event: KeyboardEvent) {
   return event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
 }
 
-// Immitate the focus effect.
-// The default focus ring may not be visible (by bug?)
-// and HTMLElement.focus's focusVisible option is not supported for now.
 function focus(container: HTMLElement, linkSelector: string) {
   const link = container.querySelector(linkSelector) as HTMLElement | null;
   if (!link) {
@@ -134,10 +131,10 @@ function focus(container: HTMLElement, linkSelector: string) {
   }
   link.focus();
 
-  container.style.boxShadow = "0 0 0 4px rgb(94, 158, 214, 0.5)";
+  container.style.outline = "auto";
   link.style.outline = "none";
   const onBlur = () => {
-    container.style.boxShadow = "";
+    container.style.outline = "";
     link.style.outline = "";
     link?.removeEventListener("blur", onBlur);
   };
