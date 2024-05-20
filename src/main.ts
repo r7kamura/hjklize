@@ -115,7 +115,7 @@ function calculateDistance(aElement: Element, bElement: Element) {
 function isEditing() {
   return document.activeElement?.tagName == "INPUT" ||
     document.activeElement?.tagName == "TEXTAREA" ||
-    document.activeElement?.getAttribute("contenteditable") == "true";
+    (document.activeElement as HTMLElement)?.isContentEditable;
 }
 
 function isModifierKey(event: KeyboardEvent) {
