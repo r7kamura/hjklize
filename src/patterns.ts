@@ -10,6 +10,10 @@ export const patterns: Pattern[] = [
     selector: ".td-pb-span8 .td-block-span12 .entry-title a",
   },
   {
+    url: "^https://store.steampowered.com/wishlist/id/",
+    selector: ".title",
+  },
+  {
     url: "^https://www.amazon.co.jp/s\\?",
     selector: "h2 a",
   },
