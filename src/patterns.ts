@@ -1,44 +1,59 @@
 export type Pattern = {
   url: string;
-  selector: string;
+  container: string;
+  link: string;
 };
 
 // Ordered by url in alphabetical order.
 export const patterns: Pattern[] = [
   {
     url: "^https://automaton-media.com/$",
-    selector: ".td-pb-span8 .td-block-span12 .entry-title a",
+    container: ".td-pb-span8 .td-block-span12",
+    link: "a",
   },
   {
     url: "^https://news.ycombinator.com/",
-    selector: ".title a",
+    container: ".athing",
+    link: ".title a",
   },
   {
     url: "^https://store.steampowered.com/wishlist/id/",
-    selector: ".title",
+    container: ".wishlist_row",
+    link: "a",
   },
   {
     url: "^https://www.4gamer.net/",
-    selector: "h2 a",
+    container: ".V2_article_container",
+    link: "h2 a",
   },
   {
     url: "^https://www.amazon.co.jp/s\\?",
-    selector: "h2 a",
+    container: ".s-result-item",
+    link: "h2 a",
   },
   {
     url: "^https://www.gamespark.jp/",
-    selector: "main .news-list .link",
+    container: "main .news-list section",
+    link: "a",
   },
   {
     url: "^https://www.google.com/search\\?",
-    selector: "a[jsname='UWckNb']",
+    container: ".N54PNb",
+    link: "a",
   },
   {
     url: "^https://www.youtube.com/$",
-    selector: "#video-title-link",
+    container: "#content",
+    link: "#video-title-link",
   },
   {
-    url: "^https://www.youtube.com/(@|results\\?)",
-    selector: "#video-title",
+    url: "^https://www.youtube.com/results\\?",
+    container: "ytd-video-renderer",
+    link: "#video-title",
+  },
+  {
+    url: "^https://www.youtube.com/@",
+    container: "ytd-grid-video-renderer",
+    link: "a",
   },
 ];

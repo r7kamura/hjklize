@@ -28,7 +28,7 @@ function setupKeydownEventHandler(patterns: Pattern[]) {
       return;
     }
 
-    const eventHandler = createKeydownEventHandler(pattern.selector);
+    const eventHandler = createKeydownEventHandler(pattern);
     document.addEventListener("keydown", eventHandler, true);
     window.navigation.addEventListener("currententrychange", () => {
       document.removeEventListener("keydown", eventHandler, true);
@@ -36,7 +36,7 @@ function setupKeydownEventHandler(patterns: Pattern[]) {
   });
 }
 
-function createKeydownEventHandler(selector: string) {
+function createKeydownEventHandler(pattern: Pattern) {
   return (event: KeyboardEvent) => {
     if (isEditing()) {
       return;
@@ -45,11 +45,11 @@ function createKeydownEventHandler(selector: string) {
       return;
     }
 
-    const element = findElement(event, selector);
-    if (!element) {
+    const container = findContainer(event, pattern.container, pattern.link);
+    if (!container) {
       return;
     }
-    focus(element as HTMLElement);
+    focus(container as HTMLElement, pattern.link);
 
     // Prevent scrolling.
     event.preventDefault();
@@ -59,42 +59,44 @@ function createKeydownEventHandler(selector: string) {
   };
 }
 
-function findElement(event: KeyboardEvent, selector: string) {
+function findContainer(event: KeyboardEvent, containerSelector: string, linkSelector: string) {
   const direction = detectDirection(event);
   if (!direction) {
     return null;
   }
 
-  if (!document.activeElement?.matches(selector)) {
-    return document.querySelector(selector);
+  const activeContainer = findActiveContainer(containerSelector);
+  const candidateContainers = searchContainers(containerSelector, linkSelector);
+  if (!activeContainer) {
+    return candidateContainers[0];
   }
 
-  const activeRectangle = document.activeElement.getBoundingClientRect();
-  return Array.from(document.querySelectorAll(selector)).filter((element) => {
-    if (element == document.activeElement) {
+  const activeContainerRectangle = activeContainer.getBoundingClientRect();
+  return candidateContainers.filter((candidateContainer) => {
+    if (candidateContainer == activeContainer) {
       return false;
     }
 
-    const elementRectangle = element.getBoundingClientRect();
+    const candidateContainerRectangle = candidateContainer.getBoundingClientRect();
     switch (direction) {
       case "up":
-        return elementRectangle.bottom < activeRectangle.bottom &&
-          elementRectangle.right >= activeRectangle.left &&
-          elementRectangle.left <= activeRectangle.right;
+        return candidateContainerRectangle.bottom < activeContainerRectangle.bottom &&
+          candidateContainerRectangle.right >= activeContainerRectangle.left &&
+          candidateContainerRectangle.left <= activeContainerRectangle.right;
       case "down":
-        return elementRectangle.top > activeRectangle.top &&
-          elementRectangle.right >= activeRectangle.left &&
-          elementRectangle.left <= activeRectangle.right;
+        return candidateContainerRectangle.top > activeContainerRectangle.top &&
+          candidateContainerRectangle.right >= activeContainerRectangle.left &&
+          candidateContainerRectangle.left <= activeContainerRectangle.right;
       case "left":
-        return elementRectangle.right < activeRectangle.right &&
-          elementRectangle.bottom >= activeRectangle.top &&
-          elementRectangle.top <= activeRectangle.bottom;
+        return candidateContainerRectangle.right < activeContainerRectangle.right &&
+          candidateContainerRectangle.bottom >= activeContainerRectangle.top &&
+          candidateContainerRectangle.top <= activeContainerRectangle.bottom;
       case "right":
-        return elementRectangle.left > activeRectangle.left &&
-          elementRectangle.bottom >= activeRectangle.top &&
-          elementRectangle.top <= activeRectangle.bottom;
+        return candidateContainerRectangle.left > activeContainerRectangle.left &&
+          candidateContainerRectangle.bottom >= activeContainerRectangle.top &&
+          candidateContainerRectangle.top <= activeContainerRectangle.bottom;
     }
-  }).sort(byDistanceFrom(document.activeElement))[0];
+  }).sort(byDistanceFrom(activeContainer))[0];
 }
 
 function byDistanceFrom(baseElement: Element) {
@@ -125,19 +127,33 @@ function isModifierKey(event: KeyboardEvent) {
 // Immitate the focus effect.
 // The default focus ring may not be visible (by bug?)
 // and HTMLElement.focus's focusVisible option is not supported for now.
-function focus(element: HTMLElement) {
-  element.focus();
+function focus(container: HTMLElement, linkSelector: string) {
+  const link = container.querySelector(linkSelector) as HTMLElement | null;
+  if (!link) {
+    return;
+  }
+  link.focus();
 
-  element.style.boxShadow = "0 0 0 4px rgb(94, 158, 214, 0.5)";
-  element.style.outline = "none";
+  container.style.boxShadow = "0 0 0 4px rgb(94, 158, 214, 0.5)";
+  link.style.outline = "none";
   const onBlur = () => {
-    element.style.boxShadow = "";
-    element.style.outline = "";
-    element?.removeEventListener("blur", onBlur);
+    container.style.boxShadow = "";
+    link.style.outline = "";
+    link?.removeEventListener("blur", onBlur);
   };
-  element.addEventListener("blur", onBlur);
+  link.addEventListener("blur", onBlur);
 }
 
 function detectDirection(event: KeyboardEvent) {
   return keyMap[event.key];
+}
+
+function findActiveContainer(containerSelector: string) {
+  return document.activeElement?.closest(containerSelector);
+}
+
+function searchContainers(containerSelector: string, linkSelector: string) {
+  return Array.from(document.querySelectorAll(containerSelector)).filter((container) => {
+    return container.querySelector(linkSelector);
+  });
 }
