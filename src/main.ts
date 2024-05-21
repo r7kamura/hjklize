@@ -1,21 +1,6 @@
-import { patterns, Pattern } from "./patterns";
-
-type Direction = "up" | "down" | "left" | "right";
-
-type KeyMap = {
-  [key: string]: Direction;
-};
-
-const keyMap: KeyMap = {
-  "ArrowUp": "up",
-  "ArrowDown": "down",
-  "ArrowLeft": "left",
-  "ArrowRight": "right",
-  "k": "up",
-  "j": "down",
-  "h": "left",
-  "l": "right",
-};
+import { keyMap } from "./keymap";
+import { patterns } from "./patterns";
+import { Pattern } from "./types";
 
 setupKeydownEventHandler(patterns);
 window.navigation.addEventListener("currententrychange", () => {

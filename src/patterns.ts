@@ -1,8 +1,4 @@
-export type Pattern = {
-  url: string;
-  container: string;
-  link: string;
-};
+import { Pattern } from "./types";
 
 // Ordered by url in alphabetical order.
 export const patterns: Pattern[] = [
