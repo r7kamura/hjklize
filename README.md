@@ -23,7 +23,7 @@ Then, follow the instructions below to install the extension.
 
 Once installed, it's automatically activated on supported pages.
 
-For example, you can navigate Google search results with <kbd>↓</kbd> <kbd>↑</kbd> or <kbd>J</kbd> <kbd>K</kbd> keys, open the link with <kbd>Enter</kbd> key, or open it in a background tab with <kbd>Ctrl+Enter</kbd> key.
+For example, you can navigate Google search results with <kbd>↓</kbd> <kbd>↑</kbd> or <kbd>J</kbd> <kbd>K</kbd> keys, open the link with <kbd>Enter</kbd> key, or open it in a background tab with <kbd>Ctrl+Enter</kbd> key on Windows, and <kbd>Command+Enter</kbd> key on MacOS.
 
 ## Supported Pages
 
