@@ -13,7 +13,7 @@ function setupKeydownEventHandler(patterns: Pattern[]) {
       return;
     }
 
-    const eventHandler = createKeydownEventHandler(pattern);
+    const eventHandler = createKeydownEventHandler(pattern.container, pattern.link);
     document.addEventListener("keydown", eventHandler, true);
     window.navigation.addEventListener("currententrychange", () => {
       document.removeEventListener("keydown", eventHandler, true);
@@ -21,7 +21,7 @@ function setupKeydownEventHandler(patterns: Pattern[]) {
   });
 }
 
-function createKeydownEventHandler(pattern: Pattern) {
+function createKeydownEventHandler(containerSelector: string, linkSelector: string) {
   return (event: KeyboardEvent) => {
     if (isEditing()) {
       return;
@@ -30,11 +30,11 @@ function createKeydownEventHandler(pattern: Pattern) {
       return;
     }
 
-    const container = findContainer(event, pattern.container, pattern.link);
+    const container = findContainer(event, containerSelector, linkSelector);
     if (!container) {
       return;
     }
-    focus(container as HTMLElement, pattern.link);
+    focus(container as HTMLElement, linkSelector);
 
     // Prevent scrolling.
     event.preventDefault();
