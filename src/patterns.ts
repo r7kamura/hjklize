@@ -38,8 +38,8 @@ export const patterns: Pattern[] = [
   },
   {
     url: "^https://www.google.com/search\\?",
-    container: ".N54PNb",
-    link: "a",
+    container: ".MjjYud:not(:has(.cUnQKe)):not(:has(.EyBRub))",
+    link: "a[ping]",
   },
   {
     url: "^https://www.youtube.com/$",
