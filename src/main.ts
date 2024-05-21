@@ -131,6 +131,8 @@ function focus(container: HTMLElement, linkSelector: string) {
   }
   link.focus();
 
+  container.scrollIntoView({ block: "center" });
+
   container.style.outline = "auto";
   link.style.outline = "none";
   const onBlur = () => {
