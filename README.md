@@ -27,30 +27,6 @@ For example, you can navigate Google search results with <kbd>↓</kbd> <kbd>↑
 
 ## Supported Sites
 
-This extension is made up of a simple combination of URL regex patterns and CSS selectors like this:
-
-```ts
-const patterns = [
-  {
-    url: "^https://www.google.com/search\\?",
-    selector: "a[jsname='UWckNb']",
-  },
-  {
-    url: "^https://www.youtube.com/$",
-    selector: "#video-title-link",
-  },
-  {
-    url: "^https://www.youtube.com/(@|results\\?)",
-    selector: "#video-title",
-  },
-  {
-    url: "^https://www.amazon.co.jp/s\\?",
-    selector: "h2 a",
-  },
-  // ...
-]
-```
-
-See [src/patterns.ts](src/patterns.ts) for the full list of supported sites.
+This extension is made up of a simple combination of URL regex patterns and CSS selectors. See [src/patterns.ts](src/patterns.ts) for the full list of supported sites.
 
 If you would like to support your most frequently accessed sites, please send us a pull request.
