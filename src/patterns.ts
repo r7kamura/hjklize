@@ -44,8 +44,8 @@ export const patterns: Pattern[] = [
   },
   {
     url: "^https://www.youtube.com/results\\?",
-    container: "ytd-video-renderer",
-    link: "#video-title",
+    container: "ytd-video-renderer,ytd-playlist-renderer",
+    link: "#video-title,a:has(#video-title)",
   },
   {
     url: "^https://www.youtube.com/@",
