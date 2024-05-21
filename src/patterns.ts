@@ -28,7 +28,7 @@ export const patterns: Pattern[] = [
   },
   {
     url: "^https://www.amazon.co.jp/s\\?",
-    container: ".s-result-item",
+    container: ".s-result-item:not(:has(.s-result-item))",
     link: "h2 a",
   },
   {
