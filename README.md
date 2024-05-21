@@ -21,12 +21,12 @@ Then, follow the instructions below to install the extension.
 
 ## Usage
 
-Once installed, it's automatically activated on supported websites.
+Once installed, it's automatically activated on supported pages.
 
 For example, you can navigate Google search results with <kbd>↓</kbd> <kbd>↑</kbd> or <kbd>J</kbd> <kbd>K</kbd> keys, open the link with <kbd>Enter</kbd> key, or open it in a background tab with <kbd>Ctrl+Enter</kbd> key.
 
-## Supported Sites
+## Supported Pages
 
-This extension is made up of a simple combination of URL regex patterns and CSS selectors. See [src/patterns.ts](src/patterns.ts) for the full list of supported sites.
+This extension is made up of a simple combination of URL regex patterns and CSS selectors. See [src/patterns.ts](src/patterns.ts) for the full list of supported pages.
 
 If you would like to support your most frequently accessed sites, please send us a pull request.
