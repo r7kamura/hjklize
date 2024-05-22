@@ -52,4 +52,9 @@ export const patterns: Pattern[] = [
     container: "ytd-grid-video-renderer",
     link: "a",
   },
+  {
+    url: "^https://zenn.dev/",
+    container: ".ArticleList_itemContainer__UNI2Y,.ArticleCard_container__duCK7,.BookLink_container__9S5ov,.BookLargeLink_container__BtUdP,.ScrapRow_container__ia7f8",
+    link: "a",
+  },
 ];
