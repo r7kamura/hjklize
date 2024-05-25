@@ -34,7 +34,7 @@ export const patterns: Pattern[] = [
   },
   {
     url: "^https://www.google.com/search\\?",
-    container: ".MjjYud:not(:has(.cUnQKe)):not(:has(.EyBRub))",
+    container: ".MjjYud:not(:has(.cUnQKe)):not(:has(.EyBRub)):not(:has(.sATSHe)),.sATSHe",
     link: "a[ping]",
   },
   {
